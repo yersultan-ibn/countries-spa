@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { selectCurrentCountry, selectDetails } from '../store/details/details-selectors';
 import { useEffect } from 'react';
-import { loadCountyByName } from '../store/details/details-actions';
+import { clearDetails, loadCountyByName } from '../store/details/details-actions';
 
 
 export const Details = () => {
@@ -17,7 +17,11 @@ export const Details = () => {
   const {currentCountry, error, status} = useSelector(selectDetails);
 
   useEffect(() =>{
-    dispatch(loadCountyByName(name))
+    dispatch(loadCountyByName(name));
+
+    return () => {
+     dispatch(clearDetails());
+    };
   },[name, dispatch])
 
   return (

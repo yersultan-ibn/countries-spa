@@ -1,5 +1,5 @@
 import { SET_ERROR } from "../countries/countries-actions"
-import { SET_COUNTRY, SET_LOADING } from "./details-actions"
+import { CLEAR_DETAILS, SET_COUNTRY, SET_LOADING } from "./details-actions"
 
 const initialState = {
     currentCountry: null,
@@ -29,6 +29,11 @@ switch(type){
             status: 'received',
             error: null,
             currentCountry: payload
+        }
+    }
+    case CLEAR_DETAILS:{
+        return{
+            initialState
         }
     }
     default: {
