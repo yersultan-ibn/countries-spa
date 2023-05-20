@@ -36,7 +36,7 @@ const Input = styled.input.attrs({
 
 export const Search = () => {
   const dispatch = useDispatch();
-  const search = useSelector((state) => selectSearch(state));
+  const search = useSelector(selectSearch);
 
   const handleSearch = (e) => {
     dispatch(setSearch(e.target.value));
