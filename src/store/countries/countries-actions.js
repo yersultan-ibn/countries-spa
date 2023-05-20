@@ -1,12 +1,10 @@
-import { ALL_COUNTRIES } from "../../config";
+export const SET_COUNTRIES = "@@theme/SET_COUNTRIES";
+export const SET_LOADING = "@@theme/SET_LOADING";
+export const SET_ERROR = "@@theme/SET_ERROR";
 
-export const SET_COUNTRIES = "@@country/SET_COUNTRIES";
-export const SET_LOADING = "@@country/SET_LOADING";
-export const SET_ERROR = "@@country/SET_ERROR";
-
-export const setCountries = (countries) => ({
+export const setCountries = (theme) => ({
   type: SET_COUNTRIES,
-  payload: countries,
+  payload: theme,
 });
 
 export const setLoading = () => ({
@@ -21,9 +19,10 @@ export const setError = (err) => ({
 export const loadCountries =
   () =>
   (dispatch, _, { client, api }) => {
-    dispatch(setLoading);
+    dispatch(setLoading());
+
     client
       .get(api.ALL_COUNTRIES)
       .then(({ data }) => dispatch(setCountries(data)))
-      .catch(({ err }) => dispatch(setError(err)));
+      .catch(({ err }) => dispatch(setError(err.message)));
   };

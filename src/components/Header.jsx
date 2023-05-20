@@ -6,6 +6,7 @@ import { IoMoon, IoMoonOutline } from "react-icons/io5";
 import { Container } from "./Container";
 import { useDispatch, useSelector } from "react-redux";
 import { setTheme } from "../store/theme/theme-actions";
+import { selectTheme } from "../store/theme/theme-selectors";
 
 const HeaderEl = styled.header`
   box-shadow: var(--shadow);
@@ -38,8 +39,9 @@ const ModeSwitcher = styled.div`
 
 export const Header = () => {
   const dispatch = useDispatch();
-  const theme = useSelector((state) => state.theme);
-
+  const theme = useSelector((state) => selectTheme(state));
+  // const theme = "dark";
+  
   const handleTheme = () => {
     dispatch(setTheme(theme === "dark" ? "light" : "dark"));
   };
