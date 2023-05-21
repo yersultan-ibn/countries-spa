@@ -1,4 +1,4 @@
-import { CLEAR_CONTROLS, SET_REGION, SET_SEARCH } from "./controls-actions";
+import { CELAR_COUNTRIES, SET_REGION, SET_SEARCH } from "./controls-actions";
 
 const initialState = {
   search: "",
@@ -7,19 +7,19 @@ const initialState = {
 
 export const controlsReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case SET_REGION: {
-      return {
-        ...state,
-        region: payload,
-      };
-    }
     case SET_SEARCH: {
       return {
         ...state,
         search: payload,
       };
     }
-    case CLEAR_CONTROLS: {
+    case SET_REGION: {
+      return {
+        ...state,
+        region: payload,
+      };
+    }
+    case CELAR_COUNTRIES: {
       return initialState;
     }
     default: {

@@ -1,7 +1,7 @@
 import { SET_COUNTRIES, SET_ERROR, SET_LOADING } from "./countries-actions";
 
 const initialState = {
-  status: "idle", // loadgin | received | rejected
+  status: "idle",
   list: [],
   error: null,
 };
@@ -11,9 +11,8 @@ export const countriesReducer = (state = initialState, { type, payload }) => {
     case SET_COUNTRIES: {
       return {
         ...state,
-        list: payload,
-        error: null,
         status: "received",
+        list: payload,
       };
     }
     case SET_LOADING: {
@@ -26,8 +25,8 @@ export const countriesReducer = (state = initialState, { type, payload }) => {
     case SET_ERROR: {
       return {
         ...state,
-        status: payload,
-        error: true,
+        status: "error",
+        error: payload,
       };
     }
     default: {

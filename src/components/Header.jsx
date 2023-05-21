@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setTheme } from "../store/theme/theme-actions";
 import { selectTheme } from "../store/theme/theme-selectors";
 import { clearControls } from "../store/controls/controls-actions";
+import { selectClearCountries } from "../store/controls/controls-selectors";
 
 const HeaderEl = styled.header`
   box-shadow: var(--shadow);
@@ -40,13 +41,18 @@ const ModeSwitcher = styled.div`
 
 export const Header = () => {
   const dispatch = useDispatch();
-  const theme = useSelector((state) => selectTheme(state));
+  const theme = useSelector(selectTheme);
+  const clearCountries = useSelector(selectClearCountries);
+
+  // const theme = "dark";
 
   const handleTheme = () => {
     dispatch(setTheme(theme === "dark" ? "light" : "dark"));
   };
 
-  const cleanUp = () => dispatch(clearControls());
+  const cleanUp = () => {
+    dispatch(selectClearCountries(clearCountries))
+  };
 
   useEffect(() => {
     document.body.setAttribute("data-theme", theme);
