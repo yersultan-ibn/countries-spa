@@ -11,7 +11,7 @@ const ModeSwitcher = styled.div`
 `;
 
 const ThemeSwitcher = () => {
-  const {theme, toggleTheme} = useTheme();
+  const [theme, toggleTheme] = useTheme();
 
   return (
     <ModeSwitcher onClick={toggleTheme}>

@@ -1,23 +1,21 @@
-import React from "react";
-import { Card } from "../../components/Card";
-import { List } from "../../components/List";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  loadCountries,
-  selectCountriesInfo,
-  selectVisibleCountries,
-} from "./countries-slice";
-import { selectRegion, selectSearch } from "../controls/controls-slice";
-import { useEffect } from "react";
-import { useCountries } from "./use-countries";
+import { useNavigate } from 'react-router-dom';
 
-export const CountryList = () => {
+import { List } from '../../components/List';
+import { Card } from '../../components/Card';
+import { useCountries } from './use-countries';
+
+
+const CountryList = () => {
   const navigate = useNavigate();
-  const [countries, { error, status, qty }] = useCountries();
+
+  const [countries, {error, status}] = useCountries();
 
   return (
     <>
+      {error && <h2>Can't fetch data</h2>}
+      {status === 'loading' && <h2>Loading...</h2>}
+
+      {status === 'received' && (
       <List>
         {countries.map((c) => {
           const countryInfo = {
@@ -25,15 +23,15 @@ export const CountryList = () => {
             name: c.name,
             info: [
               {
-                title: "Population",
+                title: 'Population',
                 description: c.population.toLocaleString(),
               },
               {
-                title: "Region",
+                title: 'Region',
                 description: c.region,
               },
               {
-                title: "Capital",
+                title: 'Capital',
                 description: c.capital,
               },
             ],
@@ -48,6 +46,9 @@ export const CountryList = () => {
           );
         })}
       </List>
+      )}
     </>
-  );
-};
+  )
+}
+
+export {CountryList};
