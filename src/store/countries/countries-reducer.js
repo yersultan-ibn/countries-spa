@@ -1,32 +1,35 @@
-import { SET_COUNTRIES, SET_ERROR, SET_LOADING } from './countries-actions';
+import { SET_COUNTRIES, SET_ERROR, SET_LOADING } from "./countries-actions";
 
 const initialState = {
-  status: 'idle', // loading | received | rejected
-  error: null,
+  loading: "idle",
   list: [],
-}
+  error: null,
+};
 
-export const countriesReducer = (state = initialState, {type, payload}) => {
+export const countriesReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case SET_LOADING:
+    case SET_COUNTRIES: {
       return {
-        ...state,
-        status: 'loading',
-        error: null,
-      }
-    case SET_ERROR:
-      return {
-        ...state,
-        status: 'rejected',
-        error: payload,
-      }
-    case SET_COUNTRIES:
-      return {
-        ...state,
-        status: 'received',
+        status: "received",
         list: payload,
-      }
-    default:
-      return state;
+      };
+    }
+    case SET_LOADING: {
+      return {
+        status: "loading",
+        error: null,
+      };
+    }
+    case SET_ERROR: {
+      return {
+        status: "rejected",
+        error: payload,
+      };
+    }
+    default: {
+      return {
+        state,
+      };
+    }
   }
-}
+};
