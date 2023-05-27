@@ -1,9 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { IoSearch } from "react-icons/io5";
-import { useEffect } from "react";
-import axios from "axios";
-import { searchByCountry } from "../config";
+import { IoSearch } from 'react-icons/io5';
+import { useSearch } from './use-search';
 
 const InputContainer = styled.label`
   background-color: var(--colors-ui-base);
@@ -23,8 +21,8 @@ const InputContainer = styled.label`
 `;
 
 const Input = styled.input.attrs({
-  type: "search",
-  placeholder: "Search for a country...",
+  type: 'search',
+  placeholder: 'Search for a country...',
 })`
   margin-left: 2rem;
   border: none;
@@ -34,10 +32,12 @@ const Input = styled.input.attrs({
 `;
 
 export const Search = () => {
+  const [search, handleSearch] = useSearch();
+
   return (
     <InputContainer>
       <IoSearch />
-      <Input  />
+      <Input onChange={handleSearch} value={search}/>
     </InputContainer>
   );
 };

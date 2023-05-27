@@ -1,7 +1,5 @@
-import styled from "styled-components";
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { filterByCode } from "../config";
+import styled from 'styled-components';
+import { useNeighbors } from './use-neighbors';
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -105,6 +103,8 @@ export const Info = (props) => {
     push,
   } = props;
 
+  const neighbors = useNeighbors(borders);
+
   return (
     <Wrapper>
       <InfoImage src={flag} alt={name} />
@@ -131,19 +131,19 @@ export const Info = (props) => {
           </List>
           <List>
             <ListItem>
-              <b>Top Level Domain</b>
+              <b>Top Level Domain</b>{' '}
               {topLevelDomain.map((d) => (
                 <span key={d}>{d}</span>
               ))}
             </ListItem>
             <ListItem>
-              <b>Currency</b>
+              <b>Currency</b>{' '}
               {currencies.map((c) => (
                 <span key={c.code}>{c.name} </span>
               ))}
             </ListItem>
             <ListItem>
-              <b>Top Level Domain</b>
+              <b>Top Level Domain</b>{' '}
               {languages.map((l) => (
                 <span key={l.name}>{l.name}</span>
               ))}
@@ -156,9 +156,9 @@ export const Info = (props) => {
             <span>There is no border countries</span>
           ) : (
             <TagGroup>
-              {[].map((b) => (
-                <Tag key={b} onClick={() => push(`/country/${b}`)}>
-                  {b}
+              {neighbors.map((countryName) => (
+                <Tag key={countryName} onClick={() => push(`/country/${countryName}`)}>
+                  {countryName}
                 </Tag>
               ))}
             </TagGroup>
